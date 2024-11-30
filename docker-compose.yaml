@@ -1,0 +1,10 @@
+services:
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    network_mode: "host"
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otelcol-contrib/config.yaml
+    ports:
+      - 13133:13133
+      - 4317:4317
+      - 4318:4318

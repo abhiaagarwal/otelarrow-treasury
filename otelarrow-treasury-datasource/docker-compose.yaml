@@ -1,0 +1,24 @@
+services:
+  grafana:
+    user: root
+    container_name: 'otelarrow-treasury-datasource'
+
+    build:
+      context: ./.config
+      args:
+        grafana_image: ${GRAFANA_IMAGE:-grafana-enterprise}
+        grafana_version: ${GRAFANA_VERSION:-11.3.1}
+        development: ${DEVELOPMENT:-false}
+    ports:
+      - 3000:3000/tcp
+    volumes:
+      - ./dist:/var/lib/grafana/plugins/otelarrow-datasource
+      - ./provisioning:/etc/grafana/provisioning
+      - .:/root/otelarrow-treasury-datasource
+
+    environment:
+      NODE_ENV: development
+      GF_LOG_FILTERS: plugin.otelarrow-treasury-datasource:debug
+      GF_LOG_LEVEL: debug
+      GF_DATAPROXY_LOGGING: 1
+      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: otelarrow-treasury-datasource

@@ -1,0 +1,24 @@
+[package]
+name = "otelarrow-treasury-server"
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR APACHE"
+
+[dependencies]
+arrow = { version = "53.3.0", default-features = false, features = ["chrono-tz", "ipc", "prettyprint"] }
+arrow-ipc = { version = "53.3.0", features = ["zstd"] }
+async-stream = "0.3.6"
+axum = "0.7.9"
+color-eyre = "0.6.3"
+duckdb = { version = "1.1.1", features = ["appender-arrow", "bundled"] }
+prost = "0.13.3"
+rustc-hash = "2.0.0"
+tokio = { version = "1.41.1", features = ["full"] }
+tokio-stream = "0.1.16"
+tonic = { version = "0.12.3", features = ["zstd"] }
+tonic-reflection = "0.12.3"
+tracing = "0.1.40"
+tracing-subscriber = { version = "0.3.18", features = ["env-filter"] }
+
+[build-dependencies]
+tonic-build = "0.12.3"
